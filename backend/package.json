@@ -8,6 +8,7 @@
     "seed": "node src/scripts/seed.js"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
@@ -15,7 +16,7 @@
     "helmet": "^8.1.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "author": "Sonu",
   "license": "MIT"

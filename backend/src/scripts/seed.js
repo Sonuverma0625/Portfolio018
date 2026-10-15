@@ -1,9 +1,15 @@
 const path = require('node:path');
 require('dotenv').config({ path: path.join(__dirname, '..', '..', '.env') });
 const { readDatabase, writeDatabase } = require('../models/database');
+const persistentStore = require('../models/persistent-store');
 
 // Clear saved visitor data and reset the counters without changing portfolio content.
 async function resetVisitorData() {
+  if (await persistentStore.resetVisitorData()) {
+    process.stdout.write('Visitor data has been reset in persistent storage.\n');
+    return;
+  }
+
   const database = await readDatabase();
   database.messages = [];
   database.analytics = {

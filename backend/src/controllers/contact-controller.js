@@ -1,5 +1,6 @@
 const { randomUUID } = require('node:crypto');
 const { readDatabase, writeDatabase } = require('../models/database');
+const persistentStore = require('../models/persistent-store');
 
 const MAX_NAME_LENGTH = 80;
 const MAX_EMAIL_LENGTH = 254;
@@ -40,18 +41,21 @@ async function createContactMessage(request, response, next) {
   }
 
   try {
-    const database = await readDatabase();
     const message = {
       id: randomUUID(),
       ...validation.value,
       read: false,
       created_at: new Date().toISOString(),
     };
+    const savedMessage = await persistentStore.createMessage(message);
 
-    database.messages.push(message);
-    database.analytics.contact_submissions += 1;
-    database.analytics.last_updated = new Date().toISOString();
-    await writeDatabase(database);
+    if (!savedMessage) {
+      const database = await readDatabase();
+      database.messages.push(message);
+      database.analytics.contact_submissions += 1;
+      database.analytics.last_updated = new Date().toISOString();
+      await writeDatabase(database);
+    }
 
     response.status(201).json({
       success: true,
