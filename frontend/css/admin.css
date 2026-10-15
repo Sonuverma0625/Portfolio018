@@ -1,0 +1,174 @@
+/* Keep the private inbox simple to scan and comfortable on a phone */
+.admin-page {
+  min-height: 100vh;
+  padding: 2rem 0 5rem;
+}
+
+.admin-shell {
+  width: min(58rem, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.admin-header,
+.admin-inbox-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-intro {
+  margin-top: 5rem;
+}
+
+.admin-intro h1 {
+  margin-top: 1rem;
+  font-size: clamp(3.5rem, 9vw, 6rem);
+}
+
+.admin-intro h1 span {
+  background: linear-gradient(90deg, var(--color-text), var(--color-accent-soft), var(--color-accent));
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-intro > p:last-child {
+  max-width: 36rem;
+  margin-top: 1rem;
+}
+
+.admin-key-form {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 42rem;
+  margin-top: 2rem;
+}
+
+.admin-key-form label {
+  color: var(--color-muted);
+  font-size: 0.84rem;
+}
+
+.admin-key-form > div {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.admin-key-form input {
+  min-width: 0;
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-soft);
+}
+
+.admin-status {
+  min-height: 1.5rem;
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 2.8rem;
+}
+
+.admin-stat strong {
+  display: block;
+  margin-top: 0.65rem;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+}
+
+.admin-inbox {
+  margin-top: 3rem;
+}
+
+.admin-inbox-heading h2 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.admin-refresh,
+.message-delete {
+  border: 0;
+  background: transparent;
+  color: var(--color-accent-soft);
+}
+
+.admin-message-list {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+
+.admin-empty {
+  padding: 2rem;
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-card);
+  text-align: center;
+}
+
+.message-card h3 {
+  margin-top: 0.45rem;
+  font-size: 1.25rem;
+}
+
+.message-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+}
+
+.message-card > p:last-of-type {
+  margin-top: 0.85rem;
+  white-space: pre-wrap;
+}
+
+.message-card.is-read {
+  opacity: 0.68;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 580px) {
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-intro {
+    margin-top: 3.5rem;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .admin-stat strong {
+    margin-top: 0;
+  }
+
+  .admin-key-form > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,133 @@
+/* Reset and document defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.75rem;
+  background: var(--color-bg);
+}
+
+/* Avoid stacking native easing on top of Lenis's frame-by-frame scrolling. */
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis [data-lenis-prevent],
+html.lenis [data-lenis-prevent-wheel],
+html.lenis [data-lenis-prevent-touch],
+html.lenis [data-lenis-prevent-vertical],
+html.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+html.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Shared text and media defaults */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+p {
+  color: var(--color-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(var(--color-accent-rgb), 0.34);
+  color: var(--color-text);
+}
+
+/* Keep keyboard users oriented as they move through the page */
+:focus-visible {
+  outline: 2px solid var(--color-accent-soft);
+  outline-offset: 4px;
+}
+
+.skip-link,
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.skip-link:focus {
+  z-index: 10000;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.8rem 1rem;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  border-radius: 0.5rem;
+  background: var(--color-bg-soft);
+}

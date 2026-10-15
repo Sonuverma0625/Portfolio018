@@ -1,0 +1,217 @@
+/* Bring the preloader percentage and its exit into view */
+.scroll-progress {
+  position: fixed;
+  z-index: 130;
+  inset: 0 0 auto;
+  height: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+.preloader {
+  position: fixed;
+  z-index: 140;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  background: var(--color-bg);
+  transition: transform 750ms var(--ease-out), visibility 750ms;
+}
+
+.preloader[hidden] {
+  display: none;
+}
+
+.preloader.is-leaving {
+  visibility: hidden;
+  transform: translateY(-100%);
+}
+
+.preloader-brand {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+}
+
+.preloader-count {
+  margin-block: 0.5rem 1.3rem;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: clamp(5.5rem, 15vw, 11rem);
+  font-weight: 800;
+  letter-spacing: -0.09em;
+  line-height: 1;
+}
+
+.preloader-count span:last-child {
+  margin-left: 0.1em;
+  color: var(--color-accent-soft);
+  font-family: var(--font-mono);
+  font-size: 0.32em;
+  letter-spacing: 0;
+}
+
+.preloader-rule {
+  width: min(16rem, 58vw);
+  height: 1px;
+  overflow: hidden;
+  background: var(--color-line);
+}
+
+.preloader-rule::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+  content: '';
+  transform: scaleX(var(--loader-scale, 0));
+  transform-origin: left;
+}
+
+/* Reveal content after JavaScript confirms it can observe the page */
+.motion-enabled .reveal {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+
+.motion-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-ready .hero-title .hero-line > span {
+  transition: transform 850ms var(--ease-out);
+  transform: translateY(110%);
+}
+
+.js-ready .hero-title.is-revealed .hero-line > span {
+  transform: translateY(0);
+}
+
+.js-ready .hero-title.is-revealed .hero-name-line > span {
+  transition-delay: 100ms;
+}
+
+/* Keep small interface details animated only through GPU-friendly properties */
+.availability-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.1em;
+  margin-left: 0.35rem;
+  vertical-align: -0.16em;
+  background: var(--color-accent);
+  animation: blink 900ms steps(2, start) infinite;
+}
+
+.marquee-forward {
+  animation: marquee-left 34s linear infinite;
+}
+
+.marquee-backward {
+  animation: marquee-right 38s linear infinite;
+}
+
+.orbit-one {
+  animation: orbit-spin 18s linear infinite;
+}
+
+.orbit-two {
+  animation: orbit-spin 24s linear infinite reverse;
+}
+
+.chip-streak {
+  animation: float-chip 5.5s ease-in-out infinite;
+}
+
+.chip-stack {
+  animation: float-chip 6.4s ease-in-out -2s infinite;
+}
+
+.certificate-card:hover {
+  transform: translateY(-0.35rem);
+}
+
+/* Add a light grain texture without intercepting page interaction */
+body::after {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");
+  content: '';
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+/* Turn animation into still content for visitors who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .marquee-row,
+  .orbit,
+  .float-chip,
+  .typing-cursor {
+    animation: none !important;
+  }
+
+  .js-ready .hero-title .hero-line > span {
+    transform: none;
+  }
+
+  .skill-fill {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+
+@keyframes pulse-dot {
+  50% { opacity: 0.5; }
+}
+
+@keyframes marquee-left {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes orbit-spin {
+  to { rotate: 360deg; }
+}
+
+@keyframes float-chip {
+  50% { transform: translateY(-0.55rem); }
+}
+
+@keyframes light-sweep {
+  10%, 100% { opacity: 0; transform: skewX(-18deg) translateX(-160%); }
+  35% { opacity: 0.65; }
+  58% { opacity: 0; transform: skewX(-18deg) translateX(350%); }
+}

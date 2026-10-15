@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>Portfolio messages — Darkside</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script type="module" src="/js/admin.js"></script>
+  </head>
+  <body class="admin-page">
+    <main class="admin-shell">
+      <header class="admin-header">
+        <a class="wordmark" href="/"><span>&lt;</span>Darkside<span>/&gt;</span></a>
+        <p class="eyebrow">Private dashboard</p>
+      </header>
+      <section class="admin-intro" aria-labelledby="admin-title">
+        <p class="eyebrow">Contact inbox</p>
+        <h1 id="admin-title">Messages &amp;<br><span>site activity.</span></h1>
+        <p>Your admin key is kept in this browser tab and sent only with protected dashboard requests.</p>
+      </section>
+      <form class="admin-key-form" id="admin-form">
+        <label for="admin-key">Admin API key</label>
+        <div><input id="admin-key" type="password" autocomplete="current-password" required><button class="button button-primary" type="submit">Open inbox <span aria-hidden="true">↗</span></button></div>
+      </form>
+      <p class="admin-status" id="admin-status" role="status" aria-live="polite">Enter the ADMIN_API_KEY from the backend environment.</p>
+      <section class="admin-stats" aria-label="Portfolio activity totals">
+        <article class="admin-stat panel"><p class="panel-kicker">Messages</p><strong id="message-count">—</strong></article>
+        <article class="admin-stat panel"><p class="panel-kicker">Visits</p><strong id="visit-count">—</strong></article>
+        <article class="admin-stat panel"><p class="panel-kicker">Projects</p><strong id="project-count">—</strong></article>
+      </section>
+      <section class="admin-inbox" aria-labelledby="inbox-title">
+        <div class="admin-inbox-heading"><h2 id="inbox-title">Recent messages</h2><button class="admin-refresh" id="refresh-messages" type="button">Refresh ↻</button></div>
+        <div class="admin-message-list" id="message-list"><p class="admin-empty">Messages will appear here after you sign in.</p></div>
+      </section>
+    </main>
+  </body>
+</html>

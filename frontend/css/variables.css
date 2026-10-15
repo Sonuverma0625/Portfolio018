@@ -1,0 +1,23 @@
+/* Brand colors, type, and shared spacing for the portfolio */
+:root {
+  --color-bg: #0c0c0e;
+  --color-bg-soft: #171618;
+  --color-text: #f0ece8;
+  --color-text-peach: #e4c4ad;
+  --color-muted: #a7a09a;
+  --color-accent: #dc8056;
+  --color-accent-soft: #deb16f;
+  --color-line: rgba(240, 236, 232, 0.1);
+  --color-accent-rgb: 220, 128, 86;
+  --color-warm-rgb: 222, 177, 111;
+  --color-success: #6fe0a2;
+  --font-heading: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --page-width: 1240px;
+  --page-gutter: clamp(1.25rem, 6vw, 5.5rem);
+  --section-space: clamp(5rem, 8vw, 7rem);
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
