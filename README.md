@@ -34,34 +34,28 @@ Open <http://localhost:3002>. The site and API use the same address. To stop the
 
 The contact form saves messages to `backend/db.json`. It does not send email. Open <http://localhost:3002/admin.html> and enter the same admin key to review, mark as read, or delete saved messages. The key stays in that browser tab only. The public email and phone links can still be used to contact Sonu directly.
 
-To use another port, set `PORT` in `backend/.env`. The local CORS defaults allow localhost. On Render, set `CORS_ORIGINS` to your deployed service's exact origin (for example, `https://your-site.onrender.com`). If the frontend is hosted separately, use its origin instead. For multiple origins, use comma-separated URLs with no paths or trailing slashes.
+To use another port, set `PORT` in `backend/.env`. Local CORS defaults allow localhost. Vercel deployment domains are allowed automatically; use `CORS_ORIGINS` for any custom domain. For multiple origins, use comma-separated URLs with no paths or trailing slashes.
 
 ### Environment variables
 
 | Variable | Purpose |
 | --- | --- |
-| `PORT` | Server port. Defaults to `3002`; Render supplies its own value. |
+| `PORT` | Server port. Defaults to `3002`; hosting platforms supply their own value. |
 | `ADMIN_API_KEY` | Private key required to read or change saved messages and analytics. |
-| `CORS_ORIGINS` | Comma-separated allowed browser origins. Set this to your Render URL, or to the static frontend origin when hosted separately. |
+| `CORS_ORIGINS` | Comma-separated allowed browser origins, useful for custom domains or a separately hosted frontend. |
 | `PORTFOLIO_DB_PATH` | Optional absolute path for `db.json`, useful when the host provides persistent storage. |
 
 ## Deploy
 
-### One Render web service
+### Vercel
 
-This is the simplest setup because Express serves both the frontend and API:
+The repository is configured as one Vercel project. Express serves the API, while the build step copies the frontend into Vercel's static `public/` directory.
 
-1. Create a Render **Web Service** from the GitHub repository. Leave the root directory blank; `frontend/` and `backend/` are at the repository root.
-2. Set the build command to `npm --prefix backend ci`.
-3. Set the start command to `npm --prefix backend start`.
-4. In Environment, set a strong `ADMIN_API_KEY` and set `CORS_ORIGINS` to the service's exact public URL, such as `https://your-site.onrender.com`.
-5. If you attach persistent storage, mount it at `/var/data` and set `PORTFOLIO_DB_PATH=/var/data/db.json`.
+1. Import `Sonuverma0625/Portfolio018` from GitHub in Vercel. Keep the root directory blank.
+2. Let Vercel detect the Express project and deploy from the `main` branch.
+3. Add a strong `ADMIN_API_KEY` under Project Settings → Environment Variables, then redeploy.
 
-Messages are saved in the JSON database. Render's default filesystem is ephemeral, so new contact messages and analytics can disappear after a restart or redeploy unless the service has persistent storage. Persistent disks require a paid Render service. See [Render's persistent disk guide](https://render.com/docs/disks) for setup and limitations.
-
-### Separate static site and API
-
-You can deploy `protfolio/frontend/` to Netlify or a Render Static Site, and deploy `protfolio/backend/` as a Render Web Service. In `frontend/js/config.js`, set `API_BASE_URL` to the backend's full origin, such as `https://your-api.onrender.com` (no trailing slash). Set `CORS_ORIGINS` on the backend to the static site's full origin. The backend still needs persistent storage if contact submissions should survive restarts.
+The Vercel function filesystem is temporary, so messages and analytics saved in the JSON file can disappear when a function instance is replaced. Connect a persistent database before relying on the admin inbox for long-term message storage. See [Vercel's Express guide](https://vercel.com/docs/frameworks/backend/express) and [file storage guide](https://vercel.com/kb/guide/how-can-i-use-files-in-serverless-functions) for platform behavior and durable storage options.
 
 ## Useful API paths
 

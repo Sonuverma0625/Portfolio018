@@ -44,6 +44,14 @@ app.use((error, request, response, next) => {
   response.status(statusCode).json({ error: statusCode === 500 ? 'The server could not complete that request.' : error.message });
 });
 
-app.listen(PORT, () => {
-  process.stdout.write(`Portfolio server ready at http://localhost:${PORT}\n`);
-});
+if (require.main === module) {
+if (require.main === module) {
+  app.listen(PORT, () => {
+    process.stdout.write(`Portfolio server ready at http://localhost:${PORT}\n`);
+  });
+}
+
+module.exports = app;
+}
+
+module.exports = app;

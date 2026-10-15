@@ -2,7 +2,9 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 
 const DEFAULT_DATABASE_PATH = path.join(__dirname, '..', '..', 'db.json');
-const DATABASE_PATH = process.env.PORTFOLIO_DB_PATH || DEFAULT_DATABASE_PATH;
+const VERCEL_DATABASE_PATH = path.join('/tmp', 'portfolio-db.json');
+const DATABASE_PATH = process.env.PORTFOLIO_DB_PATH
+  || (process.env.VERCEL ? VERCEL_DATABASE_PATH : DEFAULT_DATABASE_PATH);
 
 // Read the portfolio data from its small, local JSON store.
 async function readDatabase() {
