@@ -5,9 +5,6 @@
   "workspaces": [
     "backend"
   ],
-  "scripts": {
-    "vercel-build": "node scripts/prepare-vercel-assets.js"
-  },
   "dependencies": {
     "express": "^4.22.3"
   },
